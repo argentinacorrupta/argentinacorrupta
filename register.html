@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentina Corrupta - Registro</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(0,0,0);
+            background: linear-gradient(311deg, rgba(0,0,0,1) 19%, rgba(44,157,180,1) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .register-section {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .register-section h1 {
+            margin: 0 0 20px;
+            font-size: 2.5rem;
+            color: #00BFFF;
+        }
+
+        .register-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .register-section input {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .register-section button {
+            text-decoration: none;
+            background: #00BFFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .register-section button:hover {
+            background: #0077B5;
+        }
+
+        .register-section a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .register-section a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: #00BFFF;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <section class="register-section">
+        <h1>Registro</h1>
+        <form id="registerForm" method="POST" action="http://127.0.0.1:5000/register">
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="email" name="email" placeholder="Correo Electrónico" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+        <p>
+            ¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a>
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Argentina Corrupta. Diseñado para la mejor experiencia MTA. Visítanos en nuestro <a href="#">foro</a>.</p>
+    </footer>
+</body>
+</html>

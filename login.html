@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentina Corrupta - Iniciar Sesión</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(0,0,0);
+            background: linear-gradient(311deg, rgba(0,0,0,1) 19%, rgba(44,157,180,1) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-section {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .login-section h1 {
+            margin: 0 0 20px;
+            font-size: 2.5rem;
+            color: #00BFFF;
+        }
+
+        .login-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .login-section input {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .login-section button {
+            text-decoration: none;
+            background: #00BFFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .login-section button:hover {
+            background: #0077B5;
+        }
+
+        .login-section a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .login-section a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: #00BFFF;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <section class="login-section">
+        <h1>Iniciar Sesión</h1>
+        <form action="/login" method="POST">
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
+        <p>
+            ¿No tienes una cuenta? <a href="register.html">Regístrate</a>
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Argentina Corrupta. Diseñado para la mejor experiencia MTA. Visítanos en nuestro <a href="#">foro</a>.</p>
+    </footer>
+</body>
+</html>
