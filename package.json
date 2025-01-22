@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "nodejs": "^0.0.0"
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "nodejs": "^0.0.0",
+    "vite": "^6.0.11"
   }
 }

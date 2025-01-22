@@ -25,12 +25,12 @@ init_db()
 # Email setup
 SMTP_SERVER = "smtp.gmail.com"  # Replace with your SMTP server
 SMTP_PORT = 587
-EMAIL_ADDRESS = "joacodheredia@gmail.com"  # Replace with your email
-EMAIL_PASSWORD = "Joaco51016314"  # Replace with your email password
+EMAIL_ADDRESS = "argentinacorrupta.soporte@gmail.com"  # Replace with your email
+EMAIL_PASSWORD = "Joaco51016"  # Replace with your email password
 
 def send_confirmation_email(to_email, username):
     try:
-        confirmation_link = f"http://127.0.0.1:5000/confirm?email={to_email}"
+        confirmation_link = f"http://argentinacorrupta.github.io/index/confirm?email={to_email}"
         subject = "Confirma tu registro en Argentina Corrupta"
         body = f"Hola {username},\n\nGracias por registrarte en Argentina Corrupta. Por favor, confirma tu registro haciendo clic en el siguiente enlace:\n{confirmation_link}\n\nSaludos,\nEl equipo de Argentina Corrupta."
 

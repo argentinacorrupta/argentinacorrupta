@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentina Corrupta - Foro</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(0,0,0);
+            background: linear-gradient(311deg, rgba(0,0,0,1) 19%, rgba(44,157,180,1) 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #00BFFF;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .forum-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .forum-section {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+
+        .forum-section h2 {
+            color: #00BFFF;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .forum-section h2 .badge {
+            font-size: 0.8rem;
+            background: #FFD700;
+            color: black;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 1rem;
+        }
+
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .topic {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-title {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .topic-meta {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .topic-content {
+            margin: 1rem 0;
+        }
+
+        .topic-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .reply-button {
+            background: #00BFFF;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .reply-button:hover {
+            background: #0077B5;
+        }
+
+        .replies {
+            margin-left: 2rem;
+            padding-left: 1rem;
+            border-left: 2px solid #00BFFF;
+        }
+
+        .reply {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+        }
+
+        .reply-form {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .reply-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            resize: vertical;
+        }
+
+        .new-topic-btn {
+            background: #00BFFF;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .new-topic-btn:hover {
+            background: #0077B5;
+        }
+
+        .urgent {
+            border-left: 4px solid #ff4444;
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 1rem;
+        }
+
+        .status-abierto {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-cerrado {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status-en-proceso {
+            background: #ffc107;
+            color: black;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card a {
+            color: #00BFFF;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .category-card p {
+            color: #ccc;
+            margin-top: 0.5rem;
+        }
+
+        .new-post-form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .new-post-form input,
+        .new-post-form textarea,
+        .new-post-form select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .new-post-form select {
+            color: black;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00BFFF;
+        }
+
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .profile-content {
+            position: relative;
+            background: linear-gradient(311deg, rgba(0,0,0,0.9) 19%, rgba(44,157,180,0.9) 100%);
+            margin: 10% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #2c9db4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .profile-info h2 {
+            color: #00BFFF;
+            margin: 0;
+        }
+
+        .profile-rank {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #FFD700;
+            color: black;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .profile-description {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .profile-meta {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .close-profile {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .close-profile:hover {
+            color: #00BFFF;
+        }
+
+        .settings-button {
+            background: #00BFFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;  /* Habilita el scroll vertical */
+
+        }
+
+        .settings-content {
+            position: relative;
+            background: linear-gradient(311deg, rgba(0,0,0,0.9) 19%, rgba(44,157,180,0.9) 100%);
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .settings-form label {
+            color: #00BFFF;
+            margin-bottom: 5px;
+        }
+
+        .settings-form input,
+        .settings-form textarea {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #2c9db4;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .settings-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px 0;
+            object-fit: cover;
+        }
+
+        .save-settings {
+            background: #00BFFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .save-settings:hover {
+            background: #0077B5;
+        }
+        .stats-banner {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            color: #00BFFF;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .category-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(44,157,180,0.3) 100%);
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover::before {
+            transform: scale(1.1);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00BFFF;
+        }
+
+        .announcement-banner {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: black;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px #FFD700;
+            }
+            to {
+                box-shadow: 0 0 20px #FFA500;
+            }
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: #00BFFF;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .topic-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .topic-tag {
+            background: rgba(0, 191, 255, 0.2);
+            color: #00BFFF;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        .user-rank {
+    background: #00BFFF;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-left: 8px;
+}
+
+.rank-select {
+    background: #2c9db4;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.rank-select option {
+    background: #1a1a1a;
+    color: white;
+}
+
+.user-actions {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.user-card {
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+[data-theme="dark"] {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(0,0,0);
+            background: linear-gradient(311deg, rgba(0,0,0,1) 19%, rgba(44,157,180,1) 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --accent-color: #0077B5;
+            --card-bg: rgba(0, 0, 0, 0.05);
+            --hover-bg: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .settings-section {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    max-height: 500px; /* Ajusta esta altura según tu diseño */
+    overflow-y: auto;  /* Habilita el scroll vertical */
+    padding: 10px; /* Opcional: para evitar que el contenido quede pegado */
+}
+
+
+        .settings-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .settings-card:hover {
+            background: var(--hover-bg);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .verification-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+
+        .privacy-level {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .privacy-option {
+            padding: 5px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .privacy-option.active {
+            background: var(--accent-color);
+            color: white;
+        }
+        .settings-server {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-contenido {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div>
+            <a href="index.html">Inicio</a>
+            <a href="forum.html">Foro</a>
+            <a href="#" onclick="showRules()">Reglas</a>
+            <a href="#" onclick="showFAQ()">FAQ</a>
+        </div>
+        <div id="user-section"></div>
+    </nav>
+
+    <div class="announcement-banner">
+        <h3>🎉 Evento de la Semana: Carrera Ilegal en Los Santos</h3>
+        <p>¡Únete este sábado a las 20:00 hs! Grandes premios y mucha diversión.</p>
+    </div>
+
+
+
+        <div class="stats-banner">
+            <div class="stat-item">
+                <div class="stat-number" id="totalUsers">0</div>
+                <div class="stat-label">Usuarios</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalPosts">0</div>
+                <div class="stat-label">Publicaciones</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="onlineUsers">0</div>
+                <div class="stat-label">En línea</div>
+            </div>
+        </div>
+        <div class="quick-links">
+            <a href="#" class="quick-link" onclick="showRules()">📜 Reglas del Servidor</a>
+            <a href="#" class="quick-link" onclick="showServerStatus()">🟢 Estado del Servidor</a>
+            <a href="#" class="quick-link" onclick="showDonations()">💎 Donaciones</a>
+            <a href="#" class="quick-link" onclick="showStaff()">👥 Staff</a>
+        </div>
+        <div id="serverStatusModal" class="settings-server" style="display: none;">
+            <div class="settings-contenido">
+                <button class="close-profile" onclick="closeServerStatus()">&times;</button>
+                <h2 style="color: #00BFFF">Estado del Servidor</h2>
+                <div id="serverStatusContent" style="margin-top: 20px;">
+                    <p>Cargando estado del servidor...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">🚨</div>
+                <a href="#" onclick="loadCategory('reportes')">Reportes</a>
+                <p>Reporta usuarios o problemas del servidor</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🚑</div>
+                <a href="#" onclick="loadCategory('same')">SAME</a>
+                <p>Postulaciones para el Servicio de Emergencias</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">👮</div>
+                <a href="#" onclick="loadCategory('policia')">Policía</a>
+                <p>Postulaciones para la Policía de la Ciudad</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🔧</div>
+                <a href="#" onclick="loadCategory('mecanico')">Mecánico</a>
+                <p>Postulaciones para Mecánico</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎮</div>
+                <a href="#" onclick="loadCategory('eventos')">Eventos</a>
+                <p>Eventos especiales y torneos</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">💡</div>
+                <a href="#" onclick="loadCategory('sugerencias')">Sugerencias</a>
+                <p>Propón mejoras para el servidor</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">❓</div>
+                <a href="#" onclick="loadCategory('ayuda')">Ayuda</a>
+                <p>Preguntas y soporte técnico</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">💬</div>
+                <a href="#" onclick="loadCategory('off-topic')">Off-Topic</a>
+                <p>Charla general y otros temas</p>
+            </div>
+        </div>
+        <button class="new-topic-btn" id="newTopicBtn" onclick="showNewPostForm()">Nueva Publicación</button>
+        <form id="newPostForm" class="new-post-form" onsubmit="submitNewPost(event)">
+            <div class="form-group">
+                <label for="postCategory">Categoría</label>
+                <select id="postCategory" required>
+                    <option value="">Selecciona una categoría</option>
+                    <option value="reportes">Reportes</option>
+                    <option value="same">Postulación SAME</option>
+                    <option value="policia">Postulación Policía</option>
+                    <option value="mecanico">Postulación Mecánico</option>
+                    <option value="eventos">Eventos</option>
+                    <option value="sugerencias">Sugerencias</option>
+                    <option value="ayuda">Ayuda</option>
+                    <option value="off-topic">Off-Topic</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="postTitle">Título</label>
+                <input type="text" id="postTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="postTags">Etiquetas (separadas por comas)</label>
+                <input type="text" id="postTags" placeholder="ej: urgente, bug, idea">
+            </div>
+            <div class="form-group">
+                <label for="postContent">Contenido</label>
+                <textarea id="postContent" rows="5" required></textarea>
+            </div>
+            <div class="form-group" id="reportOptions" style="display: none;">
+                <label for="reportUrgency">Urgencia</label>
+                <select id="reportUrgency">
+                    <option value="normal">Normal</option>
+                    <option value="urgent">Urgente</option>
+                </select>
+            </div>
+            <button type="submit" class="reply-button">Publicar</button>
+        </form>
+        <div id="categoryPosts" class="forum-section" style="display: none;">
+            <h2 id="categoryTitle"></h2>
+            <ul id="postsList" class="topic-list"></ul>
+        </div>
+    </div>
+
+    <div id="profileModal" class="profile-modal">
+        <div class="profile-content">
+            <button class="close-profile" onclick="closeProfile()">&times;</button>
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar"></div>
+                <div class="profile-info">
+                    <h2 id="profileUsername"></h2>
+                    <span class="profile-rank" id="profileRank"></span>
+                </div>
+            </div>
+            <div class="profile-description" id="profileDescription"></div>
+            <div class="profile-meta" id="profileMeta"></div>
+        </div>
+    </div>
+
+
+<!-- Modificar el contenido del modal de configuración -->
+<div id="settingsModal" class="settings-modal">
+    <div class="settings-content">
+        <button class="close-profile" onclick="closeSettings()">&times;</button>
+        <h2 style="color: var(--accent-color)">Configuración de Perfil</h2>
+        
+        <div class="settings-grid">
+            <!-- Apariencia -->
+            <div class="settings-section">
+                <h3>Apariencia</h3>
+                <div class="settings-card">
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+                        <span class="slider"></span>
+                    </label>
+                    <span>Modo Oscuro</span>
+                </div>
+                <div class="settings-card">
+                    <label for="fontSize">Tamaño de Fuente</label>
+                    <select id="fontSize" onchange="changeFontSize()">
+                        <option value="small">Pequeño</option>
+                        <option value="medium" selected>Mediano</option>
+                        <option value="large">Grande</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="settings-section">
+                <h3>Perfil</h3>
+                <div class="settings-card">
+                    <label for="avatarUrl">Foto de Perfil</label>
+                    <input type="url" id="avatarUrl" placeholder="URL de la imagen">
+                    <img id="avatarPreview" class="avatar-preview">
+                </div>
+                <div class="settings-card">
+                    <label for="userDescription">Descripción</label>
+                    <textarea id="userDescription" placeholder="Cuéntanos sobre ti..."></textarea>
+                </div>
+            </div>
+
+            <!-- Verificación -->
+            <div class="settings-section">
+                <h3>Verificación</h3>
+                <div class="settings-card">
+                    <div id="emailStatus">
+                        Email: <span id="userEmail"></span>
+                        <span id="verificationStatus"></span>
+                    </div>
+                    <button onclick="sendVerificationEmail()" id="verifyEmailBtn">
+                        Verificar Email
+                    </button>
+                </div>
+                <div class="settings-card">
+                    <h4>Autenticación en Dos Pasos</h4>
+                    <label class="switch">
+                        <input type="checkbox" id="2faToggle" onchange="toggle2FA()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Privacidad -->
+            <div class="settings-section">
+                <h3>Privacidad</h3>
+                <div class="settings-card">
+                    <h4>Visibilidad del Perfil</h4>
+                    <div class="privacy-level">
+                        <span class="privacy-option active" onclick="setPrivacyLevel('public')">Público</span>
+                        <span class="privacy-option" onclick="setPrivacyLevel('friends')">Amigos</span>
+                        <span class="privacy-option" onclick="setPrivacyLevel('private')">Privado</span>
+                    </div>
+                </div>
+                <div class="settings-card">
+                    <h4>Mostrar Estado En Línea</h4>
+                    <label class="switch">
+                        <input type="checkbox" id="onlineStatusToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="settings-card">
+                    <h4>Notificaciones</h4>
+                    <div>
+                        <label>
+                            <input type="checkbox" checked> Menciones
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" checked> Respuestas
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" checked> Mensajes Privados
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seguridad -->
+            <div class="settings-section">
+                <h3>Seguridad</h3>
+                <div class="settings-card">
+                    <button onclick="changePassword()">Cambiar Contraseña</button>
+                </div>
+                <div class="settings-card">
+                    <h4>Sesiones Activas</h4>
+                    <div id="activeSessions">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="save-settings" onclick="saveSettings(event)">Guardar Cambios</button>
+    </div>
+</div>   
+<div id="rulesModal" class="settings-modal">
+    <div class="settings-content">
+        <button class="close-profile" onclick="closeRules()">&times;</button>
+        <h2 style="color: #00BFFF">Reglas del Servidor</h2>
+        <div style="margin-top: 20px">
+            <h3>1. Comportamiento General</h3>
+            <ul>
+                <li>Respeta a todos los jugadores.</li>
+                <li>No usar hacks, mods o cualquier software externo.</li>
+                <li>No hacer spam en el chat global o local.</li>
+                <li>No insultar ni discriminar a otros jugadores.</li>
+                <li>No abusar de bugs; repórtalos a los administradores.</li>
+            </ul>
+            <h3>2. Roleplay (RP)</h3>
+            <ul>
+                <li>Mantén el personaje en todo momento.</li>
+                <li>No hacer MG (MetaGaming): Usar información OOC (fuera de personaje) dentro del juego.</li>
+                <li>No hacer PG (PowerGaming): Realizar acciones imposibles o forzar situaciones a otros jugadores.</li>
+                <li>No hacer DM (DeathMatch): Atacar a otros jugadores sin motivo válido dentro del rol.</li>
+                <li>No hacer CK (Character Kill) sin la aprobación adecuada.</li>
+                <li>No hacer RK (Revenge Kill): Buscar venganza inmediatamente después de morir.</li>
+            </ul>
+            <h3>3. Economía y Propiedades</h3>
+            <ul>
+                <li>No abusar de sistemas económicos del servidor.</li>
+                <li>No realizar transferencias de dinero entre personajes propios.</li>
+                <li>El uso indebido de propiedades puede resultar en sanciones.</li>
+            </ul>
+            <h3>4. Vehículos</h3>
+            <ul>
+                <li>No usar vehículos para atropellar a otros jugadores sin motivo (VDM - Vehicle DeathMatch).</li>
+                <li>Estaciona los vehículos en lugares apropiados según el rol.</li>
+                <li>Evita manejar de forma irrealista (ej., saltos excesivos o choques intencionales).</li>
+            </ul>
+            <h3>5. Comunicación</h3>
+            <ul>
+                <li>No usar canales OOC para interrumpir el roleplay.</li>
+                <li>Usa el chat IC (In Character) para interactuar dentro del rol.</li>
+                <li>Evita el uso excesivo de mayúsculas en los mensajes.</li>
+            </ul>
+            <h3>6. Administración</h3>
+            <ul>
+                <li>Sigue las indicaciones de los administradores.</li>
+                <li>No discutir sanciones en el chat global; utiliza los canales apropiados.</li>
+                <li>No impersonar (hacerse pasar por) administradores.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded'); // Para debugging
+    checkLogin();
+    const lastCategory = localStorage.getItem('lastViewedCategory') || 'reportes';
+    loadCategory(lastCategory);
+});
+        let posts = JSON.parse(localStorage.getItem('forumPosts')) || {};
+
+        const userRanks = {
+            admin: 'Administrador',
+            mod: 'Moderador',
+            helper: 'Ayudante',
+            user: 'Usuario'
+        };
+
+        let users = JSON.parse(localStorage.getItem('forumUsers')) || {};
+
+        function showNewPostForm() {
+            if (!getCookie('username')) {
+                alert('Debes iniciar sesión para crear una publicación');
+                return;
+            }
+            document.getElementById('newPostForm').style.display = 'block';
+            
+            document.getElementById('postCategory').addEventListener('change', function(e) {
+                document.getElementById('reportOptions').style.display = 
+                    e.target.value === 'reportes' ? 'block' : 'none';
+            });
+        }
+
+        function submitNewPost(event) {
+            event.preventDefault();
+            const username = getCookie('username');
+            if (!username) return;
+
+            const category = document.getElementById('postCategory').value;
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const urgency = document.getElementById('reportUrgency').value;
+
+            const newPost = {
+                id: Date.now(),
+                title,
+                content,
+                author: username,
+                date: new Date().toISOString(),
+                status: 'abierto',
+                urgent: category === 'reportes' && urgency === 'urgent',
+                replies: []
+            };
+
+            if (!posts[category]) {
+                posts[category] = [];
+            }
+            posts[category].unshift(newPost);
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+
+            event.target.reset();
+            event.target.style.display = 'none';
+
+            const currentCategory = document.getElementById('categoryTitle').dataset.category;
+            if (currentCategory === category) {
+                loadCategory(category);
+            }
+        }
+
+        function loadCategory(category) {
+            const categoryPosts = document.getElementById('categoryPosts');
+            const categoryTitle = document.getElementById('categoryTitle');
+            const postsList = document.getElementById('postsList');
+            
+            categoryPosts.style.display = 'block';
+            categoryTitle.textContent = getCategoryTitle(category);
+            categoryTitle.dataset.category = category;
+            postsList.innerHTML = '';
+
+            const categoryData = posts[category] || [];
+            
+            categoryData.forEach(post => {
+                const postElement = createPostElement(post, category);
+                postsList.appendChild(postElement);
+            });
+        }
+
+        function getCategoryTitle(category) {
+            const titles = {
+                'reportes': 'Reportes',
+                'same': 'Postulaciones SAME',
+                'policia': 'Postulaciones Policía',
+                'mecanico': 'Postulaciones Mecánico'
+            };
+            return titles[category] || category;
+        }
+
+        function createUser(username) {
+            if (!users[username]) {
+                users[username] = {
+                    username: username,
+                    rank: 'user',
+                    description: 'Este usuario aún no ha agregado una descripción.',
+                    createdAt: new Date().toISOString(),
+                    avatar: username.charAt(0)
+                };
+                localStorage.setItem('forumUsers', JSON.stringify(users));
+            }
+            return users[username];
+        }
+
+        function createPostElement(post, category) {
+            const li = document.createElement('li');
+            li.className = `topic ${post.urgent ? 'urgent' : ''}`;
+            
+            const date = new Date(post.date);
+            const timeAgo = getTimeAgo(date);
+
+            li.innerHTML = `
+                <div class="topic-header">
+                    <a href="#" class="topic-title">${post.title}</a>
+                    <span class="status-badge status-${post.status}">${post.status}</span>
+                </div>
+                <div class="topic-meta">Por <a href="#" onclick="showProfile('${post.author}'); return false;">${post.author}</a> - ${timeAgo}</div>
+                <div class="topic-content">${post.content}</div>
+                <div class="topic-actions">
+                    <button class="reply-button" onclick="showReplyForm('${post.id}')">Responder</button>
+                </div>
+                <div id="replyForm-${post.id}" class="reply-form">
+                    <textarea placeholder="Escribe tu respuesta..."></textarea>
+                    <button class="reply-button" onclick="submitReply('${post.id}', '${category}')">Enviar Respuesta</button>
+                </div>
+                <div class="replies">
+                    ${post.replies.map(reply => `
+                        <div class="reply">
+                            <div class="topic-meta"><a href="#" onclick="showProfile('${reply.author}'); return false;">${reply.author}</a> - ${getTimeAgo(new Date(reply.date))}</div>
+                            <div class="topic-content">${reply.content}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            return li;
+        }
+
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            
+            const intervals = {
+                año: 31536000,
+                mes: 2592000,
+                semana: 604800,
+                día: 86400,
+                hora: 3600,
+                minuto: 60
+            };
+
+            for (let [unit, secondsInUnit] of Object.entries(intervals)) {
+                const interval = Math.floor(seconds / secondsInUnit);
+                if (interval >= 1) {
+                    return `Hace ${interval} ${unit}${interval > 1 ? 's' : ''}`;
+                }
+            }
+            
+            return 'Hace un momento';
+        }
+
+        function checkLogin() {
+    const username = getCookie('username');
+    const isAdmin = getCookie('isAdmin') === 'true';
+    const userSection = document.getElementById('user-section');
+    
+    console.log('Checking login...');
+    console.log('Username:', username);
+    console.log('Is Admin:', isAdmin);
+    
+    if (username) {
+        userSection.innerHTML = `
+            <span style="color: white; margin-right: 10px;">Bienvenido, ${username}</span>
+            <button class="settings-button" onclick="showSettings()">⚙️ Configuración</button>
+            ${isAdmin ? '<button class="admin-button" onclick="showAdminPanel()">🛡️ Admin</button>' : ''}
+            <a href="#" onclick="logout(); return false;" style="color: #00BFFF; margin-left: 10px;">Cerrar Sesión</a>
+        `;
+        document.getElementById('newTopicBtn').style.display = 'block';
+    } else {
+        userSection.innerHTML = `
+            <a href="login.html" style="color: #00BFFF; margin-right: 10px;">Iniciar Sesión</a>
+            <a href="register.html" style="color: #00BFFF;">Registrarse</a>
+        `;
+        document.getElementById('newTopicBtn').style.display = 'none';
+    }
+}
+
+// Mejorar la función getCookie
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+        const cookieValue = parts.pop().split(';').shift();
+        console.log(`Cookie ${name}:`, cookieValue); // Para debugging
+        return cookieValue;
+    }
+    return null;
+}
+
+// Mejorar la función logout
+function logout() {
+    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    document.cookie = 'isAdmin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    
+    // Hacer una petición al servidor para cerrar la sesión
+    fetch('/logout', {
+        method: 'POST',
+        credentials: 'include'
+    }).then(() => {
+        window.location.href = 'login.html';
+    }).catch(error => {
+        console.error('Error al cerrar sesión:', error);
+        window.location.href = 'login.html';
+    });
+}
+
+
+        function showReplyForm(topicId) {
+            const form = document.getElementById(`replyForm-${topicId}`);
+            if (form) {
+                form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+
+        function submitReply(topicId, category) {
+            const username = getCookie('username');
+            if (!username) {
+                alert('Debes iniciar sesión para responder');
+                return;
+            }
+
+            const form = document.getElementById(`replyForm-${topicId}`);
+            const textarea = form.querySelector('textarea');
+            const content = textarea.value.trim();
+            
+            if (content) {
+                const categoryPosts = posts[category];
+                const post = categoryPosts.find(p => p.id.toString() === topicId);
+                
+                if (post) {
+                    post.replies.push({
+                        author: username,
+                        content: content,
+                        date: new Date().toISOString()
+                    });
+                    
+                    localStorage.setItem('forumPosts', JSON.stringify(posts));
+                    loadCategory(category);
+                }
+                
+                textarea.value = '';
+                form.style.display = 'none';
+            }
+        }
+
+        function showProfile(username) {
+            const user = users[username] || createUser(username);
+            const modal = document.getElementById('profileModal');
+            const avatar = document.getElementById('profileAvatar');
+            const usernameEl = document.getElementById('profileUsername');
+            const rank = document.getElementById('profileRank');
+            const description = document.getElementById('profileDescription');
+            const meta = document.getElementById('profileMeta');
+
+            if (user.avatarUrl) {
+                avatar.innerHTML = `<img src="${user.avatarUrl}" alt="${username}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                avatar.textContent = user.avatar;
+            }
+
+            usernameEl.textContent = user.username;
+            rank.textContent = userRanks[user.rank];
+            description.textContent = user.description;
+            meta.textContent = `Cuenta creada el ${new Date(user.createdAt).toLocaleDateString()}`;
+
+            modal.style.display = 'block';
+        }
+
+        function showSettings() {
+            const username = getCookie('username');
+            if (!username) return;
+
+            const user = users[username] || createUser(username);
+            const modal = document.getElementById('settingsModal');
+            const avatarUrl = document.getElementById('avatarUrl');
+            const avatarPreview = document.getElementById('avatarPreview');
+            const description = document.getElementById('userDescription');
+
+            avatarUrl.value = user.avatarUrl || '';
+            avatarPreview.src = user.avatarUrl || '';
+            description.value = user.description || '';
+
+            modal.style.display = 'block';
+
+            avatarUrl.addEventListener('input', function() {
+                avatarPreview.src = this.value;
+            });
+
+            avatarPreview.onerror = function() {
+                this.src = '';
+                this.style.display = 'none';
+            };
+
+            avatarPreview.onload = function() {
+                this.style.display = 'block';
+            };
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        function saveSettings(event) {
+            event.preventDefault();
+            const username = getCookie('username');
+            if (!username) return;
+
+            const user = users[username] || createUser(username);
+            const avatarUrl = document.getElementById('avatarUrl').value;
+            const description = document.getElementById('userDescription').value;
+
+            user.avatarUrl = avatarUrl;
+            user.description = description;
+
+            users[username] = user;
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+
+            closeSettings();
+            alert('Cambios guardados correctamente');
+        }
+
+        function closeProfile() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('profileModal');
+            if (event.target === modal) {
+                closeProfile();
+            }
+        }
+
+        window.onload = function() {
+            checkLogin();
+            const lastCategory = localStorage.getItem('lastViewedCategory') || 'reportes';
+            loadCategory(lastCategory);
+        };
+        function showRules() {
+            document.getElementById('rulesModal').style.display = 'block';
+        }
+
+        function closeRules() {
+            document.getElementById('rulesModal').style.display = 'none';
+        }
+
+        function updateStats() {
+            const userData = JSON.parse(localStorage.getItem('forumUsers')) || {};
+            const postsData = JSON.parse(localStorage.getItem('forumPosts')) || {};
+            
+            document.getElementById('totalUsers').textContent = Object.keys(userData).length;
+            
+            let totalPosts = 0;
+            Object.values(postsData).forEach(category => {
+                totalPosts += category.length;
+            });
+            document.getElementById('totalPosts').textContent = totalPosts;
+            
+            // Simular usuarios en línea
+            document.getElementById('onlineUsers').textContent = Math.floor(Math.random() * 20) + 5;
+        }
+
+        function createPostElement(post, category) {
+            const li = document.createElement('li');
+            li.className = `topic ${post.urgent ? 'urgent' : ''}`;
+            
+            const date = new Date(post.date);
+            const timeAgo = getTimeAgo(date);
+
+            li.innerHTML = `
+                <div class="topic-header">
+                    <a href="#" class="topic-title">${post.title}</a>
+                    <span class="status-badge status-${post.status}">${post.status}</span>
+                </div>
+                <div class="topic-meta">
+                    Por <a href="#" onclick="showProfile('${post.author}'); return false;">${post.author}</a> - ${timeAgo}
+                </div>
+                <div class="topic-content">${post.content}</div>
+                <div class="topic-tags">
+                    ${(post.tags || []).map(tag => `<span class="topic-tag">${tag}</span>`).join('')}
+                </div>
+                <div class="topic-actions">
+                    <button class="reply-button" onclick="showReplyForm('${post.id}')">Responder</button>
+                    ${post.author === getCookie('username') ? `
+                        <button class="reply-button" onclick="editPost('${post.id}', '${category}')">Editar</button>
+                    ` : ''}
+                </div>
+                <div id="replyForm-${post.id}" class="reply-form">
+                    <textarea placeholder="Escribe tu respuesta..."></textarea>
+                    <button class="reply-button" onclick="submitReply('${post.id}', '${category}')">Enviar Respuesta</button>
+                </div>
+                <div class="replies">
+                    ${post.replies.map(reply => `
+                        <div class="reply">
+                            <div class="topic-meta">
+                                <a href="#" onclick="showProfile('${reply.author}'); return false;">${reply.author}</a> - ${getTimeAgo(new Date(reply.date))}
+                            </div>
+                            <div class="topic-content">${reply.content}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            return li;
+        }
+
+        function submitNewPost(event) {
+            event.preventDefault();
+            const username = getCookie('username');
+            if (!username) return;
+
+            const category = document.getElementById('postCategory').value;
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const tags = document.getElementById('postTags').value
+                .split(',')
+                .map(tag => tag.trim())
+                .filter(tag => tag);
+            const urgency = document.getElementById('reportUrgency').value;
+
+            const newPost = {
+                id: Date.now(),
+                title,
+                content,
+                author: username,
+                date: new Date().toISOString(),
+                status: 'abierto',
+                urgent: category === 'reportes' && urgency === 'urgent',
+                tags,
+                replies: []
+            };
+
+            if (!posts[category]) {
+                posts[category] = [];
+            }
+            posts[category].unshift(newPost);
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+
+            event.target.reset();
+            event.target.style.display = 'none';
+            
+            updateStats();
+            loadCategory(category);
+        }
+
+        // Inicializar estadísticas al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            setInterval(updateStats, 30000); // Actualizar cada 30 segundos
+        });
+        function toggleDarkMode() {
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    // Inicializar tema
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('darkModeToggle').checked = savedTheme === 'dark';
+    }
+
+    // Tamaño de fuente
+    function changeFontSize() {
+        const size = document.getElementById('fontSize').value;
+        document.body.style.fontSize = {
+            small: '14px',
+            medium: '16px',
+            large: '18px'
+        }[size];
+        localStorage.setItem('fontSize', size);
+    }
+
+    // Verificación de email
+    async function sendVerificationEmail() {
+        const button = document.getElementById('verifyEmailBtn');
+        button.disabled = true;
+        button.textContent = 'Enviando...';
+
+        try {
+            const response = await fetch('/send-verification', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                document.getElementById('verificationStatus').innerHTML = 
+                    '<span class="verification-badge">Correo enviado</span>';
+            } else {
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            alert('Error al enviar el correo de verificación: ' + error.message);
+        } finally {
+            button.disabled = false;
+            button.textContent = 'Verificar Email';
+        }
+    }
+
+    // Autenticación en dos pasos
+    async function toggle2FA() {
+        const enabled = document.getElementById('2faToggle').checked;
+        
+        if (enabled) {
+            // Mostrar QR y configuración inicial
+            const response = await fetch('/enable-2fa', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Mostrar QR code y solicitar código de verificación
+                showQRModal(data.qrCode);
+            }
+        } else {
+            // Confirmar y desactivar
+            if (confirm('¿Estás seguro de que quieres desactivar la autenticación en dos pasos?')) {
+                await fetch('/disable-2fa', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+            } else {
+                document.getElementById('2faToggle').checked = true;
+            }
+        }
+    }
+
+    // Privacidad
+    function setPrivacyLevel(level) {
+        document.querySelectorAll('.privacy-option').forEach(option => {
+            option.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        localStorage.setItem('privacyLevel', level);
+    }
+
+    // Cambio de contraseña
+    async function changePassword() {
+        const oldPassword = prompt('Ingresa tu contraseña actual:');
+        if (!oldPassword) return;
+
+        const newPassword = prompt('Ingresa tu nueva contraseña:');
+        if (!newPassword) return;
+
+        const confirmPassword = prompt('Confirma tu nueva contraseña:');
+        if (newPassword !== confirmPassword) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+
+        try {
+            const response = await fetch('/change-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    oldPassword,
+                    newPassword
+                })
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                alert('Contraseña cambiada exitosamente');
+            } else {
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            alert('Error al cambiar la contraseña: ' + error.message);
+        }
+    }
+
+    // Guardar configuración
+    async function saveSettings(event) {
+        event.preventDefault();
+        
+        const settings = {
+            theme: document.documentElement.getAttribute('data-theme'),
+            fontSize: document.getElementById('fontSize').value,
+            avatarUrl: document.getElementById('avatarUrl').value,
+            description: document.getElementById('userDescription').value,
+            privacyLevel: localStorage.getItem('privacyLevel'),
+            showOnlineStatus: document.getElementById('onlineStatusToggle').checked,
+            notifications: {
+                mentions: document.querySelector('input[type="checkbox"][name="mentions"]').checked,
+                replies: document.querySelector('input[type="checkbox"][name="replies"]').checked,
+                messages: document.querySelector('input[type="checkbox"][name="messages"]').checked
+            }
+        };
+
+        try {
+            const response = await fetch('/update-settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(settings)
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                alert('Configuración guardada exitosamente');
+                closeSettings();
+            } else {
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            alert('Error al guardar la configuración: ' + error.message);
+        }
+    }
+
+    // Inicializar configuración
+    document.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        
+        // Cargar configuración guardada
+        const savedFontSize = localStorage.getItem('fontSize') || 'medium';
+        document.getElementById('fontSize').value = savedFontSize;
+        changeFontSize();
+
+        // Cargar nivel de privacidad
+        const savedPrivacyLevel = localStorage.getItem('privacyLevel') || 'public';
+        document.querySelector(`.privacy-option[data-level="${savedPrivacyLevel}"]`).classList.add('active');
+
+        // Cargar estado de verificación
+        fetch('/user/verification-status', {
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.verified) {
+                document.getElementById('verificationStatus').innerHTML = 
+                    '<span class="verification-badge">Verificado</span>';
+                document.getElementById('verifyEmailBtn').style.display = 'none';
+            }
+        });
+    });
+    async function showServerStatus() {
+    const modal = document.getElementById('serverStatusModal');
+    const content = document.getElementById('serverStatusContent');
+    modal.style.display = 'flex';
+
+    try {
+        // Realiza una solicitud al API del servidor
+        const response = await fetch('http://your-mta-server-ip:port/status'); // Cambia la URL al endpoint de tu servidor
+        const data = await response.json();
+
+        // Actualiza el contenido del modal
+        content.innerHTML = `
+            <h3>Información del Servidor</h3>
+            <p><strong>Nombre:</strong> ${data.serverName}</p>
+            <p><strong>Jugadores:</strong> ${data.playersOnline}/${data.maxPlayers}</p>
+            <p><strong>Estado:</strong> 🟢 En línea</p>
+            <p><strong>Map:</strong> ${data.currentMap}</p>
+        `;
+    } catch (error) {
+        content.innerHTML = `
+            <p style="color: red;">⚠️ No se pudo conectar al servidor.</p>
+            <p>Verifica que el servidor esté activo.</p>
+        `;
+    }
+}
+
+function closeServerStatus() {
+    document.getElementById('serverStatusModal').style.display = 'none';
+}
+
+</script>
+        <!-- Panel de Administración -->
+        <div id="adminPanel" class="settings-modal">
+            <div class="settings-content">
+                <button class="close-profile" onclick="closeAdminPanel()">&times;</button>
+                <h2 style="color: #00BFFF; margin-bottom: 20px;">Panel de Administración</h2>
+                
+                <div class="admin-tabs">
+                    <button class="admin-tab active" onclick="showAdminTab('users')">Usuarios</button>
+                    <button class="admin-tab" onclick="showAdminTab('posts')">Publicaciones</button>
+                    <button class="admin-tab" onclick="showAdminTab('reports')">Reportes</button>
+                </div>
+    
+                <div id="adminUsers" class="admin-content">
+                    <div class="user-list"></div>
+                </div>
+    
+                <div id="adminPosts" class="admin-content" style="display: none;">
+                    <div class="post-list"></div>
+                </div>
+    
+                <div id="adminReports" class="admin-content" style="display: none;">
+                    <div class="report-list"></div>
+                </div>
+            </div>
+        </div>
+    
+        <style>
+            .admin-button {
+                background: #dc3545;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+    
+            .admin-tabs {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+    
+            .admin-tab {
+                background: rgba(0, 0, 0, 0.3);
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+    
+            .admin-tab.active {
+                background: #00BFFF;
+            }
+    
+            .admin-content {
+                background: rgba(0, 0, 0, 0.2);
+                padding: 15px;
+                border-radius: 5px;
+                max-height: 500px;
+                overflow-y: auto;
+            }
+    
+            .user-card, .post-card, .report-card {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+    
+            .user-actions, .post-actions {
+                display: flex;
+                gap: 5px;
+            }
+    
+            .action-button {
+                padding: 5px 10px;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 0.9rem;
+            }
+    
+            .warn-button {
+                background: #ffc107;
+                color: black;
+            }
+    
+            .mute-button {
+                background: #6c757d;
+                color: white;
+            }
+    
+            .ban-button {
+                background: #dc3545;
+                color: white;
+            }
+    
+            .delete-button {
+                background: #dc3545;
+                color: white;
+            }
+    
+            .status-muted {
+                background: #6c757d;
+                color: white;
+                padding: 2px 6px;
+                border-radius: 3px;
+                font-size: 0.8rem;
+            }
+    
+            .status-banned {
+                background: #dc3545;
+                color: white;
+                padding: 2px 6px;
+                border-radius: 3px;
+                font-size: 0.8rem;
+            }
+    
+            .status-warned {
+                background: #ffc107;
+                color: black;
+                padding: 2px 6px;
+                border-radius: 3px;
+                font-size: 0.8rem;
+            }
+            footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: #00BFFF;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        </style>
+    
+    </script>
+    <script>
+
+        function showAdminPanel() {
+            if (!isAdmin()) return;
+            document.getElementById('adminPanel').style.display = 'block';
+            loadAdminData('users');
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function isAdmin() {
+            return localStorage.getItem('isAdmin') === 'true';
+        }
+
+        function showAdminTab(tab) {
+            document.querySelectorAll('.admin-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.querySelectorAll('.admin-tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`admin${tab.charAt(0).toUpperCase() + tab.slice(1)}`).style.display = 'block';
+            event.target.classList.add('active');
+            loadAdminData(tab);
+        }
+
+        function loadAdminData(tab) {
+            switch(tab) {
+                case 'users':
+                    loadUsers();
+                    break;
+                case 'posts':
+                    loadPosts();
+                    break;
+                case 'reports':
+                    loadReports();
+                    break;
+            }
+        }
+
+        function loadUsers() {
+    const userList = document.querySelector('.user-list');
+    userList.innerHTML = '';
+    
+    Object.values(users).forEach(user => {
+        const userCard = document.createElement('div');
+        userCard.className = 'user-card';
+        userCard.innerHTML = `
+            <div>
+                <strong>${user.username}</strong>
+                <span class="user-rank">${userRanks[user.rank] || 'Usuario'}</span>
+                ${user.isMuted ? '<span class="status-muted">Silenciado</span>' : ''}
+                ${user.isBanned ? '<span class="status-banned">Baneado</span>' : ''}
+                ${user.isWarned ? '<span class="status-warned">Advertido</span>' : ''}
+            </div>
+            <div class="user-actions">
+                <select class="rank-select" onchange="changeUserRank('${user.username}', this.value)">
+                    <option value="user" ${user.rank === 'user' ? 'selected' : ''}>Usuario</option>
+                    <option value="helper" ${user.rank === 'helper' ? 'selected' : ''}>Ayudante</option>
+                    <option value="mod" ${user.rank === 'mod' ? 'selected' : ''}>Moderador</option>
+                    <option value="admin" ${user.rank === 'admin' ? 'selected' : ''}>Administrador</option>
+                </select>
+                <button class="action-button warn-button" onclick="warnUser('${user.username}')">Advertir</button>
+                <button class="action-button mute-button" onclick="muteUser('${user.username}')">
+                    ${user.isMuted ? 'Desmutear' : 'Mutear'}
+                </button>
+                <button class="action-button ban-button" onclick="banUser('${user.username}')">
+                    ${user.isBanned ? 'Desbanear' : 'Banear'}
+                </button>
+            </div>
+        `;
+        userList.appendChild(userCard);
+    });
+}
+
+// Función para cambiar el rango de un usuario
+function changeUserRank(username, newRank) {
+    if (!confirm(`¿Estás seguro de que deseas cambiar el rango de ${username} a ${userRanks[newRank]}?`)) {
+        loadUsers(); // Recargar la lista para restaurar el valor anterior
+        return;
+    }
+    
+    users[username].rank = newRank;
+    localStorage.setItem('forumUsers', JSON.stringify(users));
+    loadUsers();
+}
+        function loadPosts() {
+            const postList = document.querySelector('.post-list');
+            postList.innerHTML = '';
+            
+            Object.entries(posts).forEach(([category, categoryPosts]) => {
+                categoryPosts.forEach(post => {
+                    const postCard = document.createElement('div');
+                    postCard.className = 'post-card';
+                    postCard.innerHTML = `
+                        <div>
+                            <strong>${post.title}</strong>
+                            <br>
+                            <small>Por ${post.author} en ${category}</small>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-button delete-button" onclick="deletePost('${category}', ${post.id})">Eliminar</button>
+                        </div>
+                    `;
+                    postList.appendChild(postCard);
+                });
+            });
+        }
+
+        function loadReports() {
+            const reportList = document.querySelector('.report-list');
+            reportList.innerHTML = '';
+            
+            const reports = posts.reportes || [];
+            reports.forEach(report => {
+                const reportCard = document.createElement('div');
+                reportCard.className = 'report-card';
+                reportCard.innerHTML = `
+                    <div>
+                        <strong>${report.title}</strong>
+                        <br>
+                        <small>Reportado por ${report.author}</small>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-button" onclick="resolveReport(${report.id})">Resolver</button>
+                        <button class="action-button delete-button" onclick="deleteReport(${report.id})">Eliminar</button>
+                    </div>
+                `;
+                reportList.appendChild(reportCard);
+            });
+        }
+
+        function warnUser(username) {
+            if (!confirm(`¿Estás seguro de que deseas advertir a ${username}?`)) return;
+            
+            users[username].isWarned = !users[username].isWarned;
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+            loadUsers();
+        }
+
+        function muteUser(username) {
+            if (!confirm(`¿Estás seguro de que deseas ${users[username].isMuted ? 'desmutear' : 'mutear'} a ${username}?`)) return;
+            
+            users[username].isMuted = !users[username].isMuted;
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+            loadUsers();
+        }
+
+        function banUser(username) {
+            if (!confirm(`¿Estás seguro de que deseas ${users[username].isBanned ? 'desbanear' : 'banear'} a ${username}?`)) return;
+            
+            users[username].isBanned = !users[username].isBanned;
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+            loadUsers();
+        }
+
+        function deletePost(category, postId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar esta publicación?')) return;
+            
+            posts[category] = posts[category].filter(post => post.id !== postId);
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            loadPosts();
+        }
+
+        function resolveReport(reportId) {
+            if (!confirm('¿Estás seguro de que deseas marcar este reporte como resuelto?')) return;
+            
+            const report = posts.reportes.find(r => r.id === reportId);
+            if (report) {
+                report.status = 'resuelto';
+                localStorage.setItem('forumPosts', JSON.stringify(posts));
+                loadReports();
+            }
+        }
+
+        function deleteReport(reportId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar este reporte?')) return;
+            
+            posts.reportes = posts.reportes.filter(report => report.id !== reportId);
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            loadReports();
+        }
+
+        // Modificar la función checkLogin para agregar el botón de admin
+        function checkLogin() {
+            const username = getCookie('username');
+            const userSection = document.getElementById('user-section');
+            
+            if (username) {
+                const isAdminUser = localStorage.getItem('isAdmin') === 'true';
+                userSection.innerHTML = `
+                    <span>Bienvenido, ${username}</span>
+                    <button class="settings-button" onclick="showSettings()">⚙️ Configuración</button>
+                    ${isAdminUser ? '<button class="admin-button" onclick="showAdminPanel()">🛡️ Admin</button>' : ''}
+                    <a href="#" onclick="logout()">Cerrar Sesión</a>
+                `;
+                document.getElementById('newTopicBtn').style.display = 'block';
+            } else {
+                userSection.innerHTML = `
+                    <a href="login.html">Iniciar Sesión</a>
+                    <a href="register.html">Registrarse</a>
+                `;
+                document.getElementById('newTopicBtn').style.display = 'none';
+            }
+        }
+    </script>
+        <footer>
+            <p>&copy; 2025 Argentina Corrupta. Diseñado para la mejor experiencia MTA.</p>
+        </footer>
+</body>
+</html>

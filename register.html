@@ -94,7 +94,7 @@
 <body>
     <section class="register-section">
         <h1>Registro</h1>
-        <form id="registerForm" method="POST" action="/register">
+        <form id="registerForm" onsubmit="handleRegister(event)">
             <input type="text" name="username" placeholder="Usuario" required>
             <input type="email" name="email" placeholder="Correo Electrónico" required>
             <input type="password" name="password" placeholder="Contraseña" required>
@@ -104,10 +104,44 @@
         <p>
             ¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a>
         </p>
+        <div id="errorMessage" style="color: #ff4444; margin-top: 10px;"></div>
     </section>
 
+    <script>
+async function handleRegister(event) {
+    event.preventDefault();
+    const errorMessage = document.getElementById('errorMessage');
+    
+    try {
+        const formData = {
+            username: event.target.username.value,
+            email: event.target.email.value,
+            password: event.target.password.value
+        };
+
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            window.location.href = '/login.html';  // Nota el '/' al principio
+        } else {
+            errorMessage.textContent = data.message || 'Error al registrar usuario';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        errorMessage.textContent = 'Error al conectar con el servidor';
+    }
+}    </script>
+
     <footer>
-        <p>&copy; 2025 Argentina Corrupta. Diseñado para la mejor experiencia MTA. Visítanos en nuestro <a href="#">foro</a>.</p>
+        <p>&copy; 2025 Argentina Corrupta. Diseñado para la mejor experiencia MTA.</p>
     </footer>
 </body>
 </html>

@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "1737546945547",
+      "username": "Joaco_Heredia",
+      "email": "joacodheredia@gmail.com",
+      "password": "Joaco",
+      "rank": "admin",
+      "createdAt": "2025-01-22T11:55:45.547Z",
+      "description": "",
+      "avatarUrl": "",
+      "isAdmin": true
+    }
+  ]
+}
