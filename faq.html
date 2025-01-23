@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentina Corrupta - FAQ</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(0,0,0);
+            background: linear-gradient(311deg, rgba(0,0,0,1) 19%, rgba(44,157,180,1) 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.2);
+        }
+
+        .faq-header h1 {
+            font-size: 3rem;
+            color: #00BFFF;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .faq-header p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: #ccc;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .faq-category {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .faq-category h2 {
+            color: #00BFFF;
+            margin-top: 0;
+            border-bottom: 2px solid #00BFFF;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-item {
+            margin: 1.5rem 0;
+        }
+
+        .faq-question {
+            background: rgba(0, 191, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 191, 255, 0.2);
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1rem;
+        }
+
+        .faq-toggle {
+            color: #00BFFF;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #00BFFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #0077B5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .faq-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="forum.html" class="back-button">← Volver al Foro</a>
+    
+    <div class="container">
+        <div class="faq-header">
+            <img src="logo.png" alt="Logo" width="250" height="250">        
+
+            <h1>Preguntas Frecuentes</h1>
+            <p>Encuentra respuestas a las preguntas más comunes sobre Argentina Corrupta MTA</p>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-category">
+                <h2>🎮 Servidor y Juego</h2>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>¿Cómo me uno al servidor?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>1. Descarga MTA:SA desde mtasa.com<br>
+                           2. Instala el juego y MTA<br>
+                           3. Abre MTA y busca "Argentina Corrupta" o conecta directamente usando la IP: </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>¿Cuáles son los requisitos mínimos?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>- GTA: San Andreas original<br>
+                           - 2GB de RAM<br>
+                           - Procesador dual core<br>
+                           - Conexión a internet estable</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2>💰 Economía y Rangos</h2>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>¿Cómo gano dinero en el servidor?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Hay múltiples formas de ganar dinero:<br>
+                           - Trabajos legales (taxista, camionero, etc.)<br>
+                           - Misiones y eventos<br>
+                           - Negocios propios<br>
+                           - Actividades especiales</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>¿Cómo subo de rango?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los rangos se obtienen mediante:<br>
+                           - Tiempo de juego<br>
+                           - Contribuciones a la comunidad<br>
+                           - Participación en eventos<br>
+                           - Comportamiento ejemplar</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2>🛡️ Reglas y Soporte</h2>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>¿Cómo reporto a un jugador?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Puedes reportar jugadores de tres formas:<br>
+                           1. Usando el comando /report en el juego<br>
+                           2. Contactando a un administrador<br>
+                           3. Creando un ticket en el foro</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>¿Qué hacer si encuentro un bug?</h3>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si encuentras un bug:<br>
+                           1. Documéntalo con screenshots/video<br>
+                           2. Repórtalo en la sección de bugs del foro<br>
+                           3. No lo explotes ni compartas cómo reproducirlo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            // Cerrar todos los items abiertos
+            document.querySelectorAll('.faq-item').forEach(faqItem => {
+                faqItem.classList.remove('active');
+            });
+
+            // Si el item clickeado no estaba activo, abrirlo
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

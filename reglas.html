@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentina Corrupta - Reglas</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: rgb(0,0,0);
+            background: linear-gradient(311deg, rgba(0,0,0,1) 19%, rgba(44,157,180,1) 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .rules-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.2);
+        }
+
+        .rules-header h1 {
+            font-size: 3rem;
+            color: #00BFFF;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .rules-header p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: #ccc;
+        }
+
+        .rules-section {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .rules-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .rules-section h2 {
+            color: #00BFFF;
+            border-bottom: 2px solid #00BFFF;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .rule-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #00BFFF;
+        }
+
+        .rule-item h3 {
+            color: #FFD700;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .rule-item p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .severity {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .severity.high {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff6b6b;
+        }
+
+        .severity.medium {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffd700;
+        }
+
+        .severity.low {
+            background: rgba(255, 255, 0, 0.2);
+            color: #ffff00;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #00BFFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: #0077B5;
+        }
+
+        .rules-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .rules-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .rules-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .rules-nav a:hover {
+            background: rgba(0, 191, 255, 0.2);
+        }
+
+        @media (min-width: 1024px) {
+            .rules-nav {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .rules-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="forum.html" class="back-button">← Volver al Foro</a>
+
+    <nav class="rules-nav">
+        <ul>
+            <li><a href="#general">Reglas Generales</a></li>
+            <li><a href="#roleplay">Roleplay</a></li>
+            <li><a href="#chat">Chat y Comunicación</a></li>
+            <li><a href="#vehiculos">Vehículos</a></li>
+            <li><a href="#economia">Economía</a></li>
+            <li><a href="#sanciones">Sanciones</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="rules-header">
+            <img src="logo.png" alt="Logo" width="250" height="250">        
+
+            <h1>Reglas del Servidor</h1>
+            <p>Para mantener una comunidad saludable y divertida, todos los jugadores deben seguir estas reglas</p>
+        </div>
+
+        <div id="general" class="rules-section">
+            <h2>📜 Reglas Generales</h2>
+            
+            <div class="rule-item">
+                <h3>1.1 Respeto Mutuo</h3>
+                <p>Trata a todos los jugadores con respeto. No se tolerará el acoso, discriminación, insultos o comportamiento tóxico.</p>
+                <span class="severity high">Sanción Severa</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>1.2 Uso de Cheats/Hacks</h3>
+                <p>El uso de cualquier tipo de hack, cheat o modificación que dé ventaja injusta está estrictamente prohibido.</p>
+                <span class="severity high">Ban Permanente</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>1.3 Multicuentas</h3>
+                <p>Solo se permite una cuenta por jugador. El uso de múltiples cuentas resultará en el baneo de todas ellas.</p>
+                <span class="severity medium">Ban Temporal</span>
+            </div>
+        </div>
+
+        <div id="roleplay" class="rules-section">
+            <h2>🎭 Reglas de Roleplay</h2>
+            
+            <div class="rule-item">
+                <h3>2.1 Realismo</h3>
+                <p>Mantén un comportamiento realista. No hagas acciones que serían imposibles en la vida real.</p>
+                <span class="severity medium">Advertencia/Kick</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>2.2 Metagaming</h3>
+                <p>No uses información obtenida fuera del juego dentro del roleplay.</p>
+                <span class="severity medium">Ban Temporal</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>2.3 PowerGaming</h3>
+                <p>No fuerces situaciones irreales o tomes ventaja injusta en situaciones de roleplay.</p>
+                <span class="severity medium">Ban Temporal</span>
+            </div>
+        </div>
+
+        <div id="chat" class="rules-section">
+            <h2>💬 Chat y Comunicación</h2>
+            
+            <div class="rule-item">
+                <h3>3.1 Spam</h3>
+                <p>No spamees en el chat. Esto incluye repetir mensajes o usar mayúsculas excesivamente.</p>
+                <span class="severity low">Silencio Temporal</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>3.2 Lenguaje Apropiado</h3>
+                <p>Usa lenguaje apropiado. Evita groserías excesivas y contenido adulto explícito.</p>
+                <span class="severity medium">Advertencia/Silencio</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>3.3 Publicidad</h3>
+                <p>No hagas publicidad de otros servidores o contenido no relacionado.</p>
+                <span class="severity high">Ban Temporal/Permanente</span>
+            </div>
+        </div>
+
+        <div id="vehiculos" class="rules-section">
+            <h2>🚗 Reglas de Vehículos</h2>
+            
+            <div class="rule-item">
+                <h3>4.1 Car kill (CK)</h3>
+                <p>No uses vehículos como armas para matar a otros jugadores intencionalmente.</p>
+                <span class="severity high">Ban Temporal</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>4.2 Robo de Vehículos</h3>
+                <p>El robo de vehículos debe ser realizado mediante roleplay apropiado.</p>
+                <span class="severity medium">Advertencia/Kick</span>
+            </div>
+        </div>
+
+        <div id="economia" class="rules-section">
+            <h2>💰 Reglas de Economía</h2>
+            
+            <div class="rule-item">
+                <h3>5.1 Transferencias de Dinero</h3>
+                <p>Las transferencias de grandes cantidades de dinero deben tener justificación roleplay. (+ 30,000,000$)</p>
+                <span class="severity medium">Advertencia/Reset Económico</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>5.2 Explotación de Bugs</h3>
+                <p>No explotes bugs para obtener ventajas económicas.</p>
+                <span class="severity high">Ban Permanente</span>
+            </div>
+        </div>
+
+        <div id="sanciones" class="rules-section">
+            <h2>⚖️ Sistema de Sanciones</h2>
+            
+            <div class="rule-item">
+                <h3>6.1 Advertencias</h3>
+                <p>Tres advertencias en un período de 30 días resultarán en un ban temporal.</p>
+                <span class="severity low">Acumulativo</span>
+            </div>
+
+            <div class="rule-item">
+                <h3>6.2 Apelaciones</h3>
+                <p>Las sanciones pueden ser apeladas en el foro con evidencia que respalde tu caso.</p>
+                <span class="severity medium">Proceso Administrativo</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

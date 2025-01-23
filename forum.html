@@ -701,6 +701,211 @@
     max-width: 90%;
     text-align: center;
 }
+.stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .button {
+            background: #00BFFF;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #0077B5;
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .topic {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .topic:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 0;
+            right: 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 10px 10px 0 0;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .chat-container.hidden {
+            transform: translateY(calc(100% - 40px));
+        }
+
+        .chat-header {
+            background: #00BFFF;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+        }
+
+        .chat-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        .chat-container.hidden .chat-toggle {
+            transform: rotate(180deg);
+        }
+
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .chat-input {
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .chat-input button {
+            background: #00BFFF;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 20px;
+    gap: 20px;
+}
+
+.forum-section {
+    flex: 3;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.sidebar {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    height: fit-content;
+}
+
+.category {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.category-header {
+    background: #00BFFF;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.category-content {
+    padding: 15px;
+}
+
+       .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.0rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .hero-cta {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
 
     </style>
 </head>
@@ -708,20 +913,85 @@
     <nav class="navbar">
         <div>
             <a href="index.html">Inicio</a>
-            <a href="forum.html">Foro</a>
-            <a href="#" onclick="showRules()">Reglas</a>
-            <a href="#" onclick="showFAQ()">FAQ</a>
+       <!--     <a href="forum.html">Foro</a> -->
+            <a href="reglas.html">Reglas</a>
+            <a href="faq.html">FAQ</a>
         </div>
         <div id="user-section"></div>
     </nav>
 
-    <div class="announcement-banner">
-        <h3>🎉 Evento de la Semana: Carrera Ilegal en Los Santos</h3>
-        <p>¡Únete este sábado a las 20:00 hs! Grandes premios y mucha diversión.</p>
+    <section class="hero" id="home">
+        <div class="container hero-content" data-aos="fade-up">
+            <img src="logo.png" alt="Logo" width="180" height="180">        
+
+            <h1>Argentina Corrupta MTA</h1>
+            <p>Disfruta de nuestro foro !</p>
+            <div class="hero-cta">
+            </div>
+        </div>
+    </section>
+
+    <div class="categories-grid">
+        <div class="category-card">
+            <div class="category-icon">🚨</div>
+            <a href="#" onclick="loadCategory('reportes')">Reportes</a>
+            <p>Reporta usuarios o problemas del servidor</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">🚑</div>
+            <a href="#" onclick="loadCategory('same')">SAME</a>
+            <p>Postulaciones para el Servicio de Emergencias</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">👮</div>
+            <a href="#" onclick="loadCategory('policia')">Policía</a>
+            <p>Postulaciones para la Policía de la Ciudad</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">🔧</div>
+            <a href="#" onclick="loadCategory('mecanico')">Mecánico</a>
+            <p>Postulaciones para Mecánico</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">🎮</div>
+            <a href="#" onclick="loadCategory('eventos')">Eventos</a>
+            <p>Eventos especiales y torneos</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">💡</div>
+            <a href="#" onclick="loadCategory('sugerencias')">Sugerencias</a>
+            <p>Propón mejoras para el servidor</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">❓</div>
+            <a href="#" onclick="loadCategory('ayuda')">Ayuda</a>
+            <p>Preguntas y soporte técnico</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">💬</div>
+            <a href="#" onclick="loadCategory('off-topic')">Off-Topic</a>
+            <p>Charla general y otros temas</p>
+        </div>
     </div>
 
+  <div class="main-container">
+        <main class="forum-section">
 
-
+            <div class="category">
+                <div class="category-header">
+                    <h3>📢 Anuncios y Novedades</h3>
+                </div>
+                <div class="category-content">
+                    <div class="topic">
+                        <h4>📌 Reglas del Servidor</h4>
+                        <p>Última actualización: hace 2 días</p>
+                    </div>
+                    <div class="topic">
+                        <h4>🆕 Actualizaciones y Parches</h4>
+                        <p>Última actualización: hace 5 horas</p>
+                    </div>
+                </div>
+            </div>
         <div class="stats-banner">
             <div class="stat-item">
                 <div class="stat-number" id="totalUsers">0</div>
@@ -752,48 +1022,21 @@
             </div>
         </div>
         
-        <div class="categories-grid">
-            <div class="category-card">
-                <div class="category-icon">🚨</div>
-                <a href="#" onclick="loadCategory('reportes')">Reportes</a>
-                <p>Reporta usuarios o problemas del servidor</p>
+                    <div class="category">
+                <div class="category-header">
+                    <h3>👥 Comunidad</h3>
+                </div>
+                <div class="category-content">
+                    <div class="topic">
+                        <h4>🤝 Presentaciones</h4>
+                        <p>Última actualización: hace 30 minutos</p>
+                    </div>
+                    <div class="topic">
+                        <h4>💬 Chat General</h4>
+                        <p>Última actualización: hace 5 minutos</p>
+                    </div>
+                </div>
             </div>
-            <div class="category-card">
-                <div class="category-icon">🚑</div>
-                <a href="#" onclick="loadCategory('same')">SAME</a>
-                <p>Postulaciones para el Servicio de Emergencias</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">👮</div>
-                <a href="#" onclick="loadCategory('policia')">Policía</a>
-                <p>Postulaciones para la Policía de la Ciudad</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🔧</div>
-                <a href="#" onclick="loadCategory('mecanico')">Mecánico</a>
-                <p>Postulaciones para Mecánico</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🎮</div>
-                <a href="#" onclick="loadCategory('eventos')">Eventos</a>
-                <p>Eventos especiales y torneos</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">💡</div>
-                <a href="#" onclick="loadCategory('sugerencias')">Sugerencias</a>
-                <p>Propón mejoras para el servidor</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">❓</div>
-                <a href="#" onclick="loadCategory('ayuda')">Ayuda</a>
-                <p>Preguntas y soporte técnico</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">💬</div>
-                <a href="#" onclick="loadCategory('off-topic')">Off-Topic</a>
-                <p>Charla general y otros temas</p>
-            </div>
-        </div>
         <button class="new-topic-btn" id="newTopicBtn" onclick="showNewPostForm()">Nueva Publicación</button>
         <form id="newPostForm" class="new-post-form" onsubmit="submitNewPost(event)">
             <div class="form-group">
@@ -971,6 +1214,21 @@
         <button type="submit" class="save-settings" onclick="saveSettings(event)">Guardar Cambios</button>
     </div>
 </div>   
+       <!-- <aside class="sidebar">
+            <h3>📅 Próximos Eventos</h3>
+            <div class="event-card">
+                <h4>🏁 Carrera Nocturna</h4>
+                <p>Fecha: 25/01/2025</p>
+                <p>Premio: $100,000 in-game</p>
+                <button class="button">Participar</button>
+            </div>
+            <div class="event-card">
+                <h4>🎯 Torneo de Tiro</h4>
+                <p>Fecha: 27/01/2025</p>
+                <p>Premio: Skin exclusiva</p>
+                <button class="button">Participar</button>
+            </div>
+        </aside> -->
 <div id="rulesModal" class="settings-modal">
     <div class="settings-content">
         <button class="close-profile" onclick="closeRules()">&times;</button>
@@ -1494,7 +1752,7 @@ function logout() {
 
     // Inicializar tema
     function initTheme() {
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        const savedTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.getElementById('darkModeToggle').checked = savedTheme === 'dark';
     }
@@ -1712,6 +1970,106 @@ function logout() {
 function closeServerStatus() {
     document.getElementById('serverStatusModal').style.display = 'none';
 }
+document.addEventListener('DOMContentLoaded', () => {
+            const username = localStorage.getItem('username');
+            if (!username) {
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('username').textContent = username;
+
+            // Restaurar estado del chat
+            const chatContainer = document.querySelector('.chat-container');
+            const wasHidden = localStorage.getItem('chatHidden') === 'false';
+            if (wasHidden) {
+                chatContainer.classList.add('hidden');
+            }
+        });
+        function toggleChat() {
+            const chatContainer = document.querySelector('.chat-container');
+            chatContainer.classList.toggle('hidden');
+            
+            // Guardar el estado en localStorage
+            const isHidden = chatContainer.classList.contains('hidden');
+            localStorage.setItem('chatHidden', isHidden);
+        }
+        // Función para cerrar sesión
+        async function logout() {
+            try {
+                const response = await fetch('/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('isAdmin');
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Error al cerrar sesión:', error);
+            }
+        }
+
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                const username = localStorage.getItem('username');
+                const newMessage = {
+                    username,
+                    message,
+                    timestamp: new Date().toLocaleTimeString()
+                };
+                messages.push(newMessage);
+                displayMessages();
+                messageInput.value = '';
+            }
+        }
+
+        function displayMessages() {
+            chatMessages.innerHTML = messages.map(msg => `
+                <div style="margin-bottom: 10px;">
+                    <strong>${msg.username}</strong> (${msg.timestamp}):
+                    <br>${msg.message}
+                </div>
+            `).join('');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Permitir enviar mensaje con Enter
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Simular mensajes automáticos cada cierto tiempo
+        setInterval(() => {
+            const autoMessages = [
+                'Bienvenidos al servidor!',
+                'No olviden participar en los eventos!',
+                'Recuerden leer las reglas del servidor',
+                'Ayuden a los nuevos jugadores!'
+            ];
+            const randomMessage = {
+                username: 'Sistema',
+                message: autoMessages[Math.floor(Math.random() * autoMessages.length)],
+                timestamp: new Date().toLocaleTimeString()
+            };
+            messages.push(randomMessage);
+            if (messages.length > 50) messages.shift(); // Mantener solo los últimos 50 mensajes
+            displayMessages();
+        }, 30000); // Cada 30 segundos
+
+     //   function toggleChat() {
+           // const chatContainer = document.querySelector('.chat-container');
+         //   chatContainer.classList.toggle('hidden');
+            
+            // Guardar el estado en localStorage
+       //     const isHidden = chatContainer.classList.contains('hidden');
+     //       localStorage.setItem('chatHidden', isHidden);
+   //     }
 
 </script>
         <!-- Panel de Administración -->
@@ -1739,7 +2097,18 @@ function closeServerStatus() {
                 </div>
             </div>
         </div>
-    
+        <div class="chat-container">
+        <div class="chat-header">
+            <h3>💭 Chat Global</h3>
+            <span class="chat-toggle">▼</span>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Escribe un mensaje..." id="messageInput">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
         <style>
             .admin-button {
                 background: #dc3545;
@@ -1863,6 +2232,47 @@ function closeServerStatus() {
     
     </script>
     <script>
+        // Verificar si el usuario está logueado
+        document.addEventListener('DOMContentLoaded', () => {
+            const username = localStorage.getItem('username');
+            if (!username) {
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('username').textContent = username;
+        });
+
+        // Función para cerrar sesión
+        async function logout() {
+            try {
+                const response = await fetch('/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('isAdmin');
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Error al cerrar sesión:', error);
+            }
+        }
+
+        // Simulación de chat en tiempo real
+        let messages = [];
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+
+
+
+        // Permitir enviar mensaje con Enter
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
         function showAdminPanel() {
             if (!isAdmin()) return;
@@ -2058,7 +2468,7 @@ function changeUserRank(username, newRank) {
                     <span>Bienvenido, ${username}</span>
                     <button class="settings-button" onclick="showSettings()">⚙️ Configuración</button>
                     ${isAdminUser ? '<button class="admin-button" onclick="showAdminPanel()">🛡️ Admin</button>' : ''}
-                    <a href="#" onclick="logout()">Cerrar Sesión</a>
+                    <a href="login.html" onclick="logout()">Cerrar Sesión</a>
                 `;
                 document.getElementById('newTopicBtn').style.display = 'block';
             } else {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,59 +89,144 @@
         footer a:hover {
             text-decoration: underline;
         }
+        .google-btn {
+            background: #4285f4;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-top: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .google-btn:hover {
+            background: #357abd;
+        }
+
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .requirements {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .requirements ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
     <section class="register-section">
+        <img src="logo.png" alt="Logo" width="120" height="120">        
         <h1>Registro</h1>
         <form id="registerForm" onsubmit="handleRegister(event)">
-            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="text" name="username" placeholder="Usuario" required 
+                   pattern="[A-Za-z0-9_]{3,20}" 
+                   title="El usuario debe tener entre 3 y 20 caracteres, solo letras, números y guiones bajos">
+            
             <input type="email" name="email" placeholder="Correo Electrónico" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
+            
+            <input type="password" name="password" placeholder="Contraseña" required
+                   pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                   title="La contraseña debe tener al menos 8 caracteres, una letra y un número">
+            
             <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
+            
+            <input type="date" name="birthDate" required
+                   max="2010-12-31" min="1920-01-01"
+                   title="Debes tener al menos 13 años para registrarte">
+
+            <div class="requirements">
+                <strong>Requisitos:</strong>
+                <ul>
+                    <li>Usuario: 3-20 caracteres, solo letras, números y guiones bajos</li>
+                    <li>Contraseña: Mínimo 8 caracteres, al menos una letra y un número</li>
+                    <li>Debes tener al menos 13 años para registrarte</li>
+                </ul>
+            </div>
+
             <button type="submit">Registrarse</button>
         </form>
+
+        <button onclick="window.location.href='/auth/google'" class="google-btn">
+            <img src="google.svg" alt="Google">
+            Registrarse con Google
+        </button>
+        
         <p>
             ¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a>
         </p>
         <div id="errorMessage" style="color: #ff4444; margin-top: 10px;"></div>
+        <div id="successMessage" style="color: #4CAF50; margin-top: 10px;"></div>
     </section>
 
     <script>
-async function handleRegister(event) {
-    event.preventDefault();
-    const errorMessage = document.getElementById('errorMessage');
-    
-    try {
-        const formData = {
-            username: event.target.username.value,
-            email: event.target.email.value,
-            password: event.target.password.value
-        };
+        async function handleRegister(event) {
+            event.preventDefault();
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            const password = event.target.password.value;
+            const confirmPassword = event.target.confirm_password.value;
 
-        const response = await fetch('https://index-z7dg.onrender.com/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Las contraseñas no coinciden';
+                return;
+            }
 
-        const data = await response.json();
-        
-        if (data.success) {
-            window.location.href = '/login.html';  // Nota el '/' al principio
-        } else {
-            errorMessage.textContent = data.message || 'Error al registrar usuario';
+            const birthDate = new Date(event.target.birthDate.value);
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+            
+            if (age < 13) {
+                errorMessage.textContent = 'Debes tener al menos 13 años para registrarte';
+                return;
+            }
+
+            try {
+                const formData = {
+                    username: event.target.username.value,
+                    email: event.target.email.value,
+                    password: password,
+                    birthDate: event.target.birthDate.value
+                };
+
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    errorMessage.textContent = '';
+                    successMessage.textContent = data.message;
+                    event.target.reset();
+                } else {
+                    successMessage.textContent = '';
+                    errorMessage.textContent = data.message;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.textContent = 'Error al registrar usuario';
+            }
         }
-    } catch (error) {
-        console.error('Error:', error);
-        errorMessage.textContent = 'Error al conectar con el servidor';
-    }
-}    </script>
-
-    <footer>
-        <p>&copy; 2025 Argentina Corrupta. Diseñado para la mejor experiencia MTA.</p>
-    </footer>
+    </script>
 </body>
 </html>

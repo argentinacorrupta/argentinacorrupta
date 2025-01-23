@@ -1,15 +1,32 @@
 {
   "users": [
     {
-      "id": "1737546945547",
-      "username": "Joaco_Heredia",
-      "email": "joacodheredia@gmail.com",
-      "password": "Joaco",
-      "rank": "admin",
-      "createdAt": "2025-01-22T11:55:45.547Z",
+      "id": "1737663156379",
+      "username": "Joaco",
+      "email": "joaquindheredia@sanluis.edu.ar",
+      "password": "$2a$10$ed5IZMU0xEU9IW1e/QKHguweAJqBHMKvgn4YpbSGCniAoih6YlALm",
+      "rank": "user",
+      "createdAt": "2025-01-23T20:12:36.379Z",
       "description": "",
       "avatarUrl": "",
-      "isAdmin": true
+      "isAdmin": false,
+      "emailVerified": false,
+      "birthDate": "2001-07-18",
+      "verificationToken": "f9d1824e75e0979c9f15d2a9b95bb275627c5c6fb99dc75b396b0523a42ddb3a"
+    },
+    {
+      "id": "1737663594583",
+      "username": "Joaco_Heredia",
+      "email": "joacodheredia@gmail.com",
+      "password": "$2a$10$XzDM0qMewKyV2eQlJo8qN.RK9jcGqh/5hAsov36qF1rWu6PGoOTD.",
+      "rank": "admin",
+      "createdAt": "2025-01-23T20:19:54.583Z",
+      "description": "",
+      "avatarUrl": "",
+      "isAdmin": true,
+      "emailVerified": true,
+      "birthDate": "2001-09-17",
+      "verificationToken": "a88c7a74fe17c1bc6e8c9a7f10a4a5d029e5d1745426e6960e60b59942ced9bb"
     }
   ]
 }
